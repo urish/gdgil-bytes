@@ -1,0 +1,71 @@
+<html>
+	<head>
+		<title>GDG Make-a-byte generator</title>
+		<style type="text/css">
+			.controls {
+				padding-bottom: 128px;
+				border-bottom: dashed gray 1px;
+				margin-bottom: 128px;
+			}
+		
+			.printed-page {
+				page-break-after: always;
+				
+				text-align: center;
+				font-size: 20px;
+			}
+				
+				.printed-page .magic-number {
+					font-size: 60px;
+					font-weight: bold;
+				}
+				
+			@media print {
+				.controls {
+					display:none;
+				}
+			}
+		</style>
+	</head>
+	<body ng-app ng-controller="AppController">
+		<div class="controls">
+			<h2>GDG Make-a-byte Generator</h2>
+			Number of pages to make: 
+			<input type="text" ng-model="pages" />
+		</div>
+		<div class="printed-page" ng-repeat="number in numbers track by $index">
+			<h1>GDG Make-a-byte!</h1>
+			<p>
+				Welcome to DevFest 2013!<br />
+				Your number is:
+			</p>
+			<div class="magic-number">
+				{{number}}
+			</div>
+			<p>
+				Your goal: Talk to people, Find out their numbers and Form a group with the sum 256
+			<p>
+			<p>
+				Good luck!
+			</p>
+		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.min.js"></script>
+		<script>
+			function AppController($scope) {
+				$scope.pages = 20;
+				$scope.numbers = [];
+				
+				function makeNumber() {
+					return parseInt(Math.random() * 240, 10) + 1;
+				}
+				
+				$scope.$watch('pages', function(pages) {
+					$scope.numbers = [];
+					for (var i = 0; i < pages; i++) {
+						$scope.numbers[i] = makeNumber();
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

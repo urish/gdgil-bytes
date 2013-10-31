@@ -13,13 +13,11 @@
 				margin-bottom: 128px;
 			}
 		
-			.printed-page {
-				page-break-after: always;
-				
+			.printed-page {	
+				display: inline-block;
 				text-align: center;
 				font-size: 18px;
 				width: 22%;
-				float: left;
 				padding: 10px;
 			}
 				
@@ -27,6 +25,10 @@
 					font-size: 40px;
 					font-weight: bold;
 				}
+				
+			.page-break {
+				page-break-after: always;
+			}
 				
 			@media print {
 				.controls {
@@ -59,6 +61,7 @@
 			<p>
 				Good luck! :)
 			</p>
+			<div class="page-break" ng-if="$index % 8 == 7"></div>
 		</div>
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.min.js"></script>
 		<script>
